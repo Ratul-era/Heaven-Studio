@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-bn: "Hind Siliguri", "Sora", ui-sans-serif, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-ink: #08090b;
+  --color-ink2: #0d0f13;
+  --color-graphite: #14171d;
+  --color-smoke: #1e222a;
+  --color-ash: #8b8f98;
+  --color-paper: #f4f0e8;
+  --color-brass: #c9a05a;
+  --color-brasslite: #e8cc92;
+  --color-live: #56d68b;
+  --color-sky: #7fb2ff;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-pulse-ring: pulseRing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-shimmer: shimmer 3.4s linear infinite;
+  --animate-rise: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -220% 0;
+  }
+  100% {
+    background-position: 220% 0;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-brass);
+  color: #08090b;
+}
+
+/* thin architectural scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #08090b;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#3a3f4a, #1c2027);
+  border-radius: 99px;
+  border: 2px solid #08090b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brass);
+}
+
+@utility bn {
+  font-family: var(--font-bn);
+}
+
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+@utility gold-text {
+  background: linear-gradient(100deg, #8a6a33 0%, #e8cc92 32%, #fff6e2 50%, #e8cc92 68%, #8a6a33 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@utility hairline {
+  border-color: color-mix(in srgb, var(--color-paper) 12%, transparent);
+}
+
+@utility glass {
+  background: color-mix(in srgb, #0d0f13 72%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in srgb, var(--color-paper) 10%, transparent);
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(244, 240, 232, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 240, 232, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+}
+
+@utility input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(244, 240, 232, 0.14);
+  background: rgba(244, 240, 232, 0.04);
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-paper);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.input::placeholder {
+  color: rgba(244, 240, 232, 0.3);
+}
+.input:focus {
+  border-color: rgba(201, 160, 90, 0.7);
+  box-shadow: 0 0 0 3px rgba(201, 160, 90, 0.12);
+}
+
+section {
+  scroll-margin-top: 88px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
